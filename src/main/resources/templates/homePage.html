@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+	
+		<th:block th:replace="fragments/risorse :: risorseHead"></th>
+		
+		<title>Home</title>
+		
+	</head>
+	
+	<body>
+	
+		<header>
+		
+			<th:block th:replace="fragments/navbar :: navbar('homePage')"></th>
+			
+		</header>
+		
+		<main>
+		
+			<th:block th:replace="fragments/risorse :: risorseJS"></th>
+		
+		</main>
+		
+	</body>
+	
+</html> 
