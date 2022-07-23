@@ -22,27 +22,24 @@
 			
 				<div class="col-12">
 				
+					<th:block th:if="${successMessage != null && successMessage != ''}">
+					
+				  		<div th:text="${successMessage}" class="alert alert-success text-dark"></div>
+				  	
+				  	</th:block>
+				
 					<h1>Menu</h1>
-				
-					<div>
-					
-						<a class="btn btn-primary my-2" th:href="@{/menu/aggiungi}">Aggiungi una nuova pizza</a>
-					
-						<a class="btn btn-warning my-2" th:href="@{/menu/modifica}">Modifica una pizza</a>
-					
-						<a class="btn btn-danger my-2" th:href="@{/menu/elimina}">Elimina una pizza</a>
-				
-					</div>
-					
+						
 					<table class="table table-dark table-striped" th:if="${pizze.size() > 0}">
 					
 						<thead>
 						
-							<tr>
+							<tr class="fs-3">
 							
 								<td>Nome</td>
 								<td>Prezzo</td>
 								<td>Descrizione</td>
+								<td><a class="btn btn-success my-2" th:href="@{/menu/aggiungi}"><i class="fa-solid fa-plus"></i></a></td>
 								
 							</tr>
 						
@@ -55,6 +52,12 @@
 								<td th:text="${p.nome}"></td>
 								<td th:text="${p.getPrezzoFormattato()}"></td>
 								<td th:text="${p.descrizione}"></td>
+								<td>
+								
+									<a class="btn btn-primary my-2" th:href="@{|/menu/modifica/${p.id}|}"><i class="fa-solid fa-pen-to-square"></i></a>
+									<a class="btn btn-danger my-2" th:href="@{|/menu/elimina/${p.id}|}"><i class="fa-solid fa-trash-can"></i></a>
+									
+								</td>	
 							
 							</tr>
 							
@@ -66,10 +69,31 @@
 				
 			</div>
 			
-			<div class="alert alert-info my-5" th:unless="${pizze.size() > 0}">
-			
-				<h3>Non ci sono pizze disponibili nel menu</h3>
-			
+			<div class="container-fluid" th:unless="${pizze.size() > 0}">
+				
+				<table class="table table-dark table-striped">
+					
+						<thead>
+						
+							<tr class="fs-3">
+							
+								<td>Nome</td>
+								<td>Prezzo</td>
+								<td>Descrizione</td>
+								<td><a class="btn btn-success my-2" th:href="@{/menu/aggiungi}"><i class="fa-solid fa-plus"></i></a></td>
+								
+							</tr>
+						
+						</thead>
+												
+				</table>	
+				
+				<div  class="alert alert-info">
+				
+					<h3>Non ci sono pizze disponibili nel menu</h3>
+					
+				</div>	
+				
 			</div>
 			
 			<th:block th:replace="fragments/risorse :: risorseJS"></th>

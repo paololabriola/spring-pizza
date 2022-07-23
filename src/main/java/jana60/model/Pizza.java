@@ -12,7 +12,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-
 @Entity
 public class Pizza {
 
@@ -20,15 +19,15 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotEmpty(message="Il nome è necessario")
-	@Column(nullable = false)
+	@NotEmpty(message = "Il nome è necessario")
+	@Column(nullable = false, unique = true)
 	private String nome;
 
 	@Lob
 	private String descrizione;
 	
 	@NotNull
-	@Min(value = 0)
+	@Min(value = 0, message = "Il prezzo non può essere inferiore a 0")
 	private Double prezzo;
 	
 	public Integer getId() {
