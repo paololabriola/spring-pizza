@@ -66,6 +66,21 @@
 													
 						</div>
 						
+						<div class="col-4">
+						
+							<h4>Ingredienti</h4>
+							
+							<div class="form-check" th:each="ing : ${listaIngredienti}">
+							
+							  <input class="form-check-input" th:field="*{ingredienti}" type="checkbox" th:id="|ingrediente_${ing.id}|" th:value="${ing.id}">
+							  <label class="form-check-label" th:for="|ingrediente_${ing.id}|" th:text="${ing.nome}"></label>
+							
+							</div>
+			
+						</div>
+						
+						<div class="mb-3">
+						
 						<div class="mb-3">
 						
 							<button type="submit" class="btn btn-primary">Salva</button>

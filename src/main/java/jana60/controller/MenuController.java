@@ -1,10 +1,8 @@
 package jana60.controller;
 
-import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.text.AbstractDocument.BranchElement;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jana60.model.Pizza;
+import jana60.repository.IngredienteRepository;
 import jana60.repository.PizzaRepository;
 
 @Controller
@@ -30,6 +29,9 @@ public class MenuController {
 
 	@Autowired
 	public PizzaRepository repoPizza;
+	
+	@Autowired
+	public IngredienteRepository repoIngrediente;
 	
 	@GetMapping
 	public String menu(Model model) {
@@ -45,6 +47,7 @@ public class MenuController {
 	public String formPizza(Model model) {
 		
 		model.addAttribute("pizza", new Pizza());
+		model.addAttribute("listaIngredienti", repoIngrediente.findAllByOrderByNome());
 		
 		return "aggiungi";
 		
@@ -58,6 +61,7 @@ public class MenuController {
 		if(selezionaId.isPresent()) {
 			
 			model.addAttribute("pizza", selezionaId.get());
+			model.addAttribute("listaIngredienti", repoIngrediente.findAllByOrderByNome());
 			return "modifica";
 			
 		} else {
@@ -98,10 +102,20 @@ public class MenuController {
 		}
 		
 		if(hasErrors)
-			if(nuovaPizza)
+			if(nuovaPizza) {
+				
+				model.addAttribute("listaIngredienti", repoIngrediente.findAllByOrderByNome());
 				return "/aggiungi";
-			else
+				
+			}
+				
+			else {
+				
+				model.addAttribute("listaIngredienti", repoIngrediente.findAllByOrderByNome());
 				return "/modifica";
+				
+			}
+				
 		else {
 			
 			try {
@@ -111,6 +125,7 @@ public class MenuController {
 			} catch(Exception e) {
 				
 				model.addAttribute("errorMessage", "Impossibile salvare le modifiche");
+				model.addAttribute("listaIngredienti", repoIngrediente.findAllByOrderByNome());
 				
 			}
 			

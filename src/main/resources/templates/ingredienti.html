@@ -1,0 +1,80 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+	
+		<th:block th:replace="fragments/risorse :: risorseHead"></th>
+		
+		<title>Lista Ingredienti</title>
+		
+	</head>
+	
+	<body>
+	
+		<header>
+		
+			<nav th:replace="fragments/navbar :: navbar('ingredienti')"></nav>
+			
+		</header>
+		
+		<main>
+		
+			<div class="container-fluid">
+			
+				<div class="col-12">
+				
+					<th:block th:if="${successMessage != null && successMessage != ''}">
+					
+				  		<div th:text="${successMessage}" class="alert alert-success text-dark"></div>
+				  	
+				  	</th:block>
+				
+					<h1>Lista Ingredienti</h1>
+					
+					<hr>
+					
+					<form id="form-ingredienti" th:object="${nuovoIngrediente}" th:action="@{/ingredienti/salva}" method="POST">
+		
+						<div class="input-group mb-3 has-validation">
+						
+							<input th:field="*{nome}" type="text" class="form-control" placeholder="Aggiungi un ingrediente" th:errorClass="is-invalid">
+							
+							<button class="btn btn-primary" type="submit" id="bottone-ingredienti">Salva</button>
+							
+							<div th:if="${#fields.hasErrors('nome')}" class="invalid-feedback">
+							
+								<ul>
+								
+									<li th:each="err : ${#fields.errors('nome')}" th:text="${err}">
+									
+								</ul>
+								
+							</div>		
+							
+						</div>
+		
+					</form>
+						
+					<ul class="list-group" th:if="${ingredienti.size() > 0}">
+					
+						<li class="list-group-item" th:each="ing : ${ingredienti}">
+						
+							<span th:text="${ing.nome}"></span>
+							<span class="badge rounded-pill text-bg-info" th:text="${ing.pizze.size()}" th:if="${ing.pizze.size() > 0}"></span>					
+							
+						</li>
+						
+					</ul>
+					
+					<div class="alert alert-info my-5" th:unless="${ingredienti.size() > 0}">
+						
+						<h3>Non ci sono ingredienti disponibili</h3>
+						
+					</div>
+						
+			<th:block th:replace="fragments/risorse :: risorseJS"></th>
+		
+		</main>
+		
+	</body>
+	
+</html> 
