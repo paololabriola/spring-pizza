@@ -53,10 +53,12 @@
 								<td th:text="${p.getPrezzoFormattato()}"></td>
 								<td th:text="${p.descrizione}"></td>
 								<td>
-								
+									
+									<a class="btn btn-primary" th:href="@{|/menu/dettagli/${p.id}|}" title="Detail"><i class="fa-solid fa-pizza-slice"></i></a>
 									<a class="btn btn-primary my-2" th:href="@{|/menu/modifica/${p.id}|}"><i class="fa-solid fa-pen-to-square"></i></a>
 									<a class="btn btn-danger my-2" th:href="@{|/menu/elimina/${p.id}|}"><i class="fa-solid fa-trash-can"></i></a>
-									
+									<a class="btn btn-primary" th:href="@{|/immagine/${p.id}|}" title="Images"><i class="fa-solid fa-images"></i></a>
+								
 								</td>	
 							
 							</tr>

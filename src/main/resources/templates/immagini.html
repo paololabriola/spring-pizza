@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+
+	<th:block th:replace="fragments/risorse :: risorseHead"></th:block>
+	
+	<title>Immagini Pizza</title>
+	
+	</head>
+	
+	<body>
+		
+		<nav th:replace="fragments/navbar :: navbar('menu')"></nav>
+		
+		<div class="container">
+			
+			<h1>Immagini Pizza</h1>
+			<h2 class="text-muted" th:text="${formImmagine.pizza.nome}"></h2>
+			<hr />
+			
+			<div class="col-6">
+			
+				<form id="form-img" th:object="${formImmagine}" th:action="@{/immagine/salva}" method="POST" enctype="multipart/form-data">
+					
+					<input type="hidden" th:field="*{pizza}">
+					
+					<div class="mb-3">
+					  
+					  <label for="contentMultipart" class="form-label">Aggiungi un immagine</label>
+					  <input class="form-control" type="file" id="contentMultipart" th:field="*{contentMultipart}">
+					
+					</div>
+					
+					<button class="btn btn-primary" type="submit">Salva</button>
+					
+				</form>
+				
+				<div class="row">
+				
+					<div class="col-3" th:each="img : ${immagini}">
+					
+						<img th:src="@{|/immagine/${img.id}/content|}" class="img-fluid" alt="">
+						
+					</div>
+					
+				</div>
+					
+			</div>
+			
+		</div>
+	
+		<th:bock th:replace="fragments/risorse :: risorseJS"></th:bock>
+		
+	</body>
+	
+</html> 

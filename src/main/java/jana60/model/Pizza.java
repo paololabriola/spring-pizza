@@ -23,7 +23,7 @@ public class Pizza {
 	
 	@ManyToMany
 	private List<Ingrediente> ingredienti;
-	
+		
 	public List<Ingrediente> getIngredienti() {
 		return ingredienti;
 	}

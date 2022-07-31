@@ -10,6 +10,8 @@ public interface PizzaRepository extends CrudRepository<Pizza, Integer>{
 
 	List<Pizza> findAllByOrderByPrezzoAsc();
 	
+	List<Pizza> findByNomeContainingIgnoreCase(String queryNome);
+	
 	public Integer countByNome(String nome);
 	
 	public Pizza findByNome(String nome);

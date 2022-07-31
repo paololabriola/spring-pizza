@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -43,6 +44,16 @@ public class MenuController {
 		
 	}
 	
+	@GetMapping("/dettagli/{pizzaId}")
+	public String currentPizza(@PathVariable(name = "pizzaId") Integer pizzaPrimaryKey, Model model) {
+		
+		Pizza currentPizza = repoPizza.findById(pizzaPrimaryKey).get();
+		model.addAttribute("currentPizza", currentPizza);
+			
+		return "currentPizza";
+		
+	}
+		
 	@GetMapping("/aggiungi")
 	public String formPizza(Model model) {
 		
@@ -149,6 +160,20 @@ public class MenuController {
 			
 		} else 
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "La pizza che stai provando ad eliminare non esiste");
+		
+	}
+	
+	@GetMapping("/search")
+	public String search(@RequestParam(name = "queryNome") String queryNome, Model model) {
+		/*
+		if(queryNome != null && queryNome.isEmpty())
+			queryNome = null;
+		*/
+		
+		List<Pizza> pizze = repoPizza.findByNomeContainingIgnoreCase(queryNome);
+		model.addAttribute("pizze", pizze);
+		
+		return "/menu";
 		
 	}
 	
