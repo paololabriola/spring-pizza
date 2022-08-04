@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Immagine {
 	
@@ -18,6 +20,7 @@ public class Immagine {
 	private byte[] content;
 	
 	@ManyToOne
+	@JsonBackReference
 	private Pizza pizza;
 
 	public Integer getId() {

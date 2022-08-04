@@ -10,9 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Pizza {
@@ -21,8 +24,13 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@JsonManagedReference
 	@ManyToMany
 	private List<Ingrediente> ingredienti;
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "pizza")
+	private List<Immagine> immagini;
 		
 	public List<Ingrediente> getIngredienti() {
 		return ingredienti;

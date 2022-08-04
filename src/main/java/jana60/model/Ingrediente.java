@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Ingrediente {
 
@@ -21,6 +23,7 @@ public class Ingrediente {
 	@Column(nullable = false)
 	private String nome;
 	
+	@JsonBackReference
 	@ManyToMany(mappedBy = "ingredienti")
 	private List<Pizza> pizze;
 
