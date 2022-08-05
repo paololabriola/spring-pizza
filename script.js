@@ -24,6 +24,9 @@ function createPizza(data) {
   const card = document.createElement('div');
   card.classList.add("card","col-2","mx-3","shadow-lg");
 
+  const img = document.createElement('img', 'card-img-top');
+  img.src = 'data:image/jpeg;base64,' + data.immagini[0].content;
+
   const title = document.createElement('h3');
   title.innerHTML = data.nome;
   title.className = "card-title";
@@ -35,6 +38,7 @@ function createPizza(data) {
   const cardBody = document.createElement('div');
   cardBody.className = "card-body";
   
+  card.appendChild(img);
   card.appendChild(cardBody);
   cardBody.appendChild(title);
   cardBody.appendChild(description);
